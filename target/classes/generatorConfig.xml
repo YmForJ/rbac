@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+  <context id="context1"  targetRuntime="mybatis3">
+    <jdbcConnection connectionURL="jdbc:mysql://localhost:3309/rbac_role?serverTimezone=UTC" driverClass="com.mysql.cj.jdbc.Driver" password="520922" userId="root" />
+    <javaModelGenerator targetPackage="com.woniu.entity" targetProject="rbac_demo" />
+    <sqlMapGenerator targetPackage="com.woniu.mapper" targetProject="rbac_demo"></sqlMapGenerator>
+    <javaClientGenerator targetPackage="com.woniu.mapper" targetProject="rbac_demo" type="XMLMAPPER" />
+    <table schema="rbac_role" tableName="user" catalog="rbac_role">
+    </table>
+        <table schema="rbac_role" tableName="role">
+    </table>
+        <table schema="rbac_role" tableName="permiss">
+    </table>
+        <table schema="rbac_role" tableName="userrole">
+    </table>
+        <table schema="rbac_role" tableName="rolep">
+    </table>
+  </context>
+</generatorConfiguration>
