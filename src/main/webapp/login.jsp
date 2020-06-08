@@ -1,74 +1,61 @@
+<!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<title>登录</title>
-<link rel="stylesheet" type="text/css"
-	href="bootstrap/css/bootstrap.min.css" />
-<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
-	
-</script>
-<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-<style type="text/css">
-#loginblock {
-	margin-top: 80px;
-}
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="keys" content="">
+<meta name="author" content="">
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="stylesheet" href="css/login.css">
+<style>
 </style>
 </head>
-<body class="bg-info">
-	<div class="panel col-md-4 col-md-offset-4" id="loginblock">
-		<div class="panel-heading text-center bg-primary">
-			<h3>登录页面</h3>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<div>
+					<a class="navbar-brand" href="index.html" style="font-size: 32px;">平台</a>
+				</div>
+			</div>
 		</div>
+	</nav>
 
-		<div class="panel-body">
-			<!--表单提交-->
+	<div class="container">
 
+		<form class="form-signin" role="form" action="login" method="post">
+			<h2 class="form-signin-heading">
+				<i class="glyphicon glyphicon-user"></i> 用户登录
+			</h2>
+			<div class="form-group has-success has-feedback">
+				<input type="text" class="form-control" id="inputSuccess4"
+					placeholder="请输入登录账号" autofocus name="uaccount"> <span
+					class="glyphicon glyphicon-user form-control-feedback"></span>
+			</div>
+			<div class="form-group has-success has-feedback">
+				<input type="password" class="form-control" id="inputSuccess4"
+					placeholder="请输入登录密码" style="margin-top: 10px;" name="upwd">
+				<span class="glyphicon glyphicon-lock form-control-feedback"></span>
+			</div>
 
-			<table class="table table-bordered table-hover table-striped">
-
-				<thead>
-				</thead>
-				<tbody>
-					<form action="login" method="post">
-						<div class="form-group">
-							<label for="account"><span class="input-group-addon"><span
-									class="glyphicon glyphicon-user"></span>用户名 </span> <input type=""
-								name="uaccount" id="uaccount" class="form-control" /></label>
-						</div>
-						<div class="form-group">
-							<label for="password"><span class="input-group-addon"><span
-									class="glyphicon glyphicon-lock"></span>密码 </span> <input
-								type="password" name="upwd" id="upwd" class="form-control" /></label>
-						</div>
-						<div class="text-center">
-							<button class="btn btn-success" id="loginbtn">
-								<span class="glyphicon glyphicon-log-in"></span>登录
-							</button>
-							<button type="reset" class="btn btn-warning">
-								<span class="glyphicon glyphicon-edit"></span>重置
-							</button>
-						</div>
-					</form>
-				</tbody>
-				<tfoot>
-
-				</tfoot>
-
-			</table>
-
-		</div>
-		<div class="panel-footer">
-			<div class="text-center">&copy;购物指南</div>
-		</div>
-
+			<button class="btn btn-lg btn-success btn-block"> 登录</button>
+		</form>
 	</div>
+	<script src="jquery/jquery-2.1.1.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="layer/layer.js"></script>
+	<script>
+		$(function() {
+			var msg = '${msg}';
+			if (msg != "") {
+				layer.msg(msg);
+			}
+		})
+	</script>
 </body>
 </html>
-
-<script type="text/javascript">
-
-	
-</script>
