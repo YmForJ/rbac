@@ -19,7 +19,7 @@ public class LogController {
 	public String login(User user, Model model, HttpSession session) {
 		User result = userService.login(user);
 		if (result != null) {
-			session.setAttribute("user", result);
+			session.setAttribute("loginUser", result);
 			return "index";
 		}
 

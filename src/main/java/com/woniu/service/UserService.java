@@ -14,4 +14,8 @@ public interface UserService {
 
 	void delete(Integer[] uid);
 
+	User findOne(Integer uid);
+
+	void update(User user);
+
 }
