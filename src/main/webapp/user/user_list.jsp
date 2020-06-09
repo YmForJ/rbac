@@ -10,9 +10,9 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="css/font-awesome.min.css">
-<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="${base}/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="${base}/css/font-awesome.min.css">
+<link rel="stylesheet" href="${base}/css/main.css">
 <style>
 .tree li {
 	list-style-type: none;
@@ -31,11 +31,11 @@ table tbody td:nth-child(even) {
 
 <body>
 
-	<jsp:include page="header.jsp"></jsp:include>
+	<jsp:include page="${base}/header.jsp"></jsp:include>
 
 	<div class="container-fluid">
 		<div class="row">
-			<jsp:include page="left.jsp"></jsp:include>
+			<jsp:include page="${base}/left.jsp"></jsp:include>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<div class="panel panel-default">
 					<div class="panel-heading">

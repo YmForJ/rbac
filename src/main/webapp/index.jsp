@@ -30,8 +30,8 @@
 
 <body>
 
-	<jsp:include page="header.jsp"></jsp:include>
-	<jsp:include page="left.jsp"></jsp:include>
+	<jsp:include page="${base}/header.jsp"></jsp:include>
+	<jsp:include page="${base}/left.jsp"></jsp:include>
 	<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 		<h1 class="page-header">控制面板</h1>
 
@@ -63,9 +63,9 @@
 		</div>
 	</div>
 
-	<script src="jquery/jquery-2.1.1.min.js"></script>
-	<script src="bootstrap/js/bootstrap.min.js"></script>
-	<script src="script/docs.min.js"></script>
+	<script src="${base}/jquery/jquery-2.1.1.min.js"></script>
+	<script src="${base}/bootstrap/js/bootstrap.min.js"></script>
+	<script src="${base}/script/docs.min.js"></script>
 	<script type="text/javascript">
 		$(function() {
 			$(".list-group-item").click(function() {

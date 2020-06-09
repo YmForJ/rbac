@@ -11,6 +11,7 @@ import com.woniu.entity.User;
 import com.woniu.service.UserService;
 
 @Controller
+@RequestMapping("user")
 public class UserController {
 	@Autowired
 	UserService userService;
@@ -19,7 +20,7 @@ public class UserController {
 	public String list(Model model) {
 		List<User> userList = userService.findAll();
 		model.addAttribute(userList);
-		return "user_list";
+		return "user/user_list";
 	}
 
 }

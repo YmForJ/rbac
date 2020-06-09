@@ -9,10 +9,10 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="css/font-awesome.min.css">
-<link rel="stylesheet" href="css/main.css">
-<link rel="stylesheet" href="css/doc.min.css">
+<link rel="stylesheet" href="${base}/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="${base}/css/font-awesome.min.css">
+<link rel="stylesheet" href="${base}/css/main.css">
+<link rel="stylesheet" href="${base}/css/doc.min.css">
 <style>
 .tree li {
 	list-style-type: none;
@@ -23,12 +23,12 @@
 
 <body>
 	<!-- 引入头部页面 -->
-	<jsp:include page="header.jsp"></jsp:include>
+	<jsp:include page="${base}/header.jsp"></jsp:include>
 
 	<div class="container-fluid">
 		<div class="row">
 			<!-- 引入左侧导航栏 -->
-			<jsp:include page="left.jsp"></jsp:include>
+			<jsp:include page="${base}/left.jsp"></jsp:include>
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 				<ol class="breadcrumb">
 					<li><a href="#">首页</a></li>
@@ -103,9 +103,9 @@
 			</div>
 		</div>
 	</div>
-	<script src="jquery/jquery-2.1.1.min.js"></script>
-	<script src="bootstrap/js/bootstrap.min.js"></script>
-	<script src="script/docs.min.js"></script>
+	<script src="${base}/jquery/jquery-2.1.1.min.js"></script>
+	<script src="${base}/bootstrap/js/bootstrap.min.js"></script>
+	<script src="${base}/script/docs.min.js"></script>
 	<script type="text/javascript">
 		$(function() {
 			$(".list-group-item").click(function() {

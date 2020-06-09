@@ -9,9 +9,9 @@
 <meta name="description" content="">
 <meta name="keys" content="">
 <meta name="author" content="">
-<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="css/font-awesome.min.css">
-<link rel="stylesheet" href="css/login.css">
+<link rel="stylesheet" href="${base}/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="${base}/css/font-awesome.min.css">
+<link rel="stylesheet" href="${base}/css/login.css">
 <style>
 </style>
 </head>
@@ -28,7 +28,7 @@
 
 	<div class="container">
 
-		<form class="form-signin" role="form" action="login" method="post">
+		<form class="form-signin" role="form" action="${base}/login" method="post">
 			<h2 class="form-signin-heading">
 				<i class="glyphicon glyphicon-user"></i> 用户登录
 			</h2>
@@ -46,9 +46,9 @@
 			<button class="btn btn-lg btn-success btn-block"> 登录</button>
 		</form>
 	</div>
-	<script src="jquery/jquery-2.1.1.min.js"></script>
-	<script src="bootstrap/js/bootstrap.min.js"></script>
-	<script src="layer/layer.js"></script>
+	<script src="${base}/jquery/jquery-2.1.1.min.js"></script>
+	<script src="${base}/bootstrap/js/bootstrap.min.js"></script>
+	<script src="${base}/layer/layer.js"></script>
 	<script>
 		$(function() {
 			var msg = '${msg}';
