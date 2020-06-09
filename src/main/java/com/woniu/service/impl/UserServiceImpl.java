@@ -1,5 +1,7 @@
 package com.woniu.service.impl;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,19 @@ public class UserServiceImpl implements UserService {
 		List<User> userList = userMapper.selectByExample(example);
 		return userList.size() == 0 ? null : userList.get(0);
 
+	}
+
+	@Override
+	public void save(User user) {
+		userMapper.insertSelective(user);
+	}
+
+	@Override
+	public void delete(Integer[] uid) {
+		example.clear();
+		Criteria criteria = example.createCriteria();
+		criteria.andUidIn(Arrays.asList(uid));
+		userMapper.deleteByExample(example);
 	}
 
 }

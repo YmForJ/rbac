@@ -6,15 +6,15 @@
     <javaModelGenerator targetPackage="com.woniu.entity" targetProject="rbac_demo" />
     <sqlMapGenerator targetPackage="com.woniu.mapper" targetProject="rbac_demo"></sqlMapGenerator>
     <javaClientGenerator targetPackage="com.woniu.mapper" targetProject="rbac_demo" type="XMLMAPPER" />
-    <table schema="rbac_role" tableName="user" catalog="rbac_role">
+    <table  tableName="user" catalog="rbac_role">
     </table>
         <table schema="rbac_role" tableName="role">
     </table>
-        <table schema="rbac_role" tableName="permiss">
+        <table schema="rbac_role" tableName="permission">
     </table>
         <table schema="rbac_role" tableName="userrole">
     </table>
-        <table schema="rbac_role" tableName="rolep">
+        <table schema="rbac_role" tableName="rolepermission">
     </table>
   </context>
 </generatorConfiguration>

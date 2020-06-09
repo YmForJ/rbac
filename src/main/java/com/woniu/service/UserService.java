@@ -10,4 +10,8 @@ public interface UserService {
 
 	User login(User user);
 
+	void save(User user);
+
+	void delete(Integer[] uid);
+
 }

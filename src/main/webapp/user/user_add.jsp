@@ -44,25 +44,36 @@
 						</div>
 					</div>
 					<div class="panel-body">
-						<form role="form">
+						<form role="form" action="${base}/user/addDo" method="post"
+							id="regForm">
 							<div class="form-group">
 								<label for="exampleInputPassword1">登陆账号</label> <input
-									type="text" class="form-control" id="exampleInputPassword1"
+									type="text" class="form-control" id="uaccount" name="uaccount"
 									placeholder="请输入登陆账号">
 							</div>
 							<div class="form-group">
 								<label for="exampleInputPassword1">用户名称</label> <input
-									type="text" class="form-control" id="exampleInputPassword1"
+									type="text" class="form-control" id="uname" name="uname"
 									placeholder="请输入用户名称">
 							</div>
 							<div class="form-group">
+								<label for="exampleInputPassword1">密码</label> <input
+									type="password" class="form-control" id="upwd" name="upwd"
+									placeholder="请输入用户密码">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword1">确认密码</label> <input
+									type="password" class="form-control" id="surepwd"
+									name="surepwd" placeholder="请再次输入密码">
+							</div>
+							<div class="form-group">
 								<label for="exampleInputEmail1">邮箱地址</label> <input type="email"
-									class="form-control" id="exampleInputEmail1"
+									class="form-control" id="umail" name="umail"
 									placeholder="请输入邮箱地址">
 								<p class="help-block label label-warning">请输入合法的邮箱地址, 格式为：
 									xxxx@xxxx.com</p>
 							</div>
-							<button type="button" class="btn btn-success">
+							<button type="button" class="btn btn-success" onclick="addUser()">
 								<i class="glyphicon glyphicon-plus"></i> 新增
 							</button>
 							<button type="button" class="btn btn-danger">
@@ -106,8 +117,13 @@
 	<script src="${base}/jquery/jquery-2.1.1.min.js"></script>
 	<script src="${base}/bootstrap/js/bootstrap.min.js"></script>
 	<script src="${base}/script/docs.min.js"></script>
+	<script src="${base}/layer/layer.js"></script>
 	<script type="text/javascript">
 		$(function() {
+			var msg='${msg}';
+			if(msg!=""){
+				layer.msg(msg,{time:1500,icon:1});
+			}
 			$(".list-group-item").click(function() {
 				if ($(this).find("ul")) {
 					$(this).toggleClass("tree-closed");
@@ -118,6 +134,56 @@
 					}
 				}
 			});
+
 		});
+		function addUser() {
+			var uaccountVal = $("#uaccount").val();
+			var unameVal = $("#uname").val();
+			var upwdVal = $("#upwd").val();
+			var surepwdVal = $("#surepwd").val();
+			var umailVal = $("#umail").val();
+			var zza = /^[a-z]\w{3,15}$/;
+			var zzn = /^\w{2,8}$/;
+			var zzp = /^\w{6,12}$/;
+			var zzm = /^\w+.*\w+@\w+.\w+$/;
+			if (!zza.test(uaccountVal)) {
+				layer.msg("账号:字母开头,4-16位", {
+					time : 2000,
+					icon : 5
+				});
+				return;
+			}
+			if (!zzn.test(unameVal)) {
+				layer.msg("昵称:2-8位", {
+					time : 2000,
+					icon : 5
+				});
+				return;
+			}
+			if (!zzp.test(upwdVal)) {
+				layer.msg("密码:6-12位", {
+					time : 2000,
+					icon : 5
+				});
+				return;
+			}
+			if (upwdVal != surepwdVal) {
+				layer.msg("两次输入的密码不一致", {
+					time : 2000,
+					icon : 5
+				});
+				return;
+			}
+			if (!zzm.test(umailVal)) {
+				layer.msg("邮箱格式不正确", {
+					time : 2000,
+					icon : 5
+				});
+				return;
+			}
+
+			$("#regForm").submit();
+
+		}
 	</script>
 </body>

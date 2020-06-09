@@ -28,22 +28,25 @@
 
 	<div class="container">
 
-		<form class="form-signin" role="form" action="${base}/login" method="post">
+		<form class="form-signin" role="form" action="${base}/login"
+			method="post" id="loginForm">
 			<h2 class="form-signin-heading">
 				<i class="glyphicon glyphicon-user"></i> 用户登录
 			</h2>
 			<div class="form-group has-success has-feedback">
 				<input type="text" class="form-control" id="inputSuccess4"
-					placeholder="请输入登录账号" autofocus name="uaccount"> <span
-					class="glyphicon glyphicon-user form-control-feedback"></span>
+					placeholder="请输入登录账号" autofocus name="uaccount" id="uaccount">
+				<span class="glyphicon glyphicon-user form-control-feedback"></span>
 			</div>
 			<div class="form-group has-success has-feedback">
 				<input type="password" class="form-control" id="inputSuccess4"
-					placeholder="请输入登录密码" style="margin-top: 10px;" name="upwd">
-				<span class="glyphicon glyphicon-lock form-control-feedback"></span>
+					placeholder="请输入登录密码" style="margin-top: 10px;" name="upwd"
+					id="upwd"> <span
+					class="glyphicon glyphicon-lock form-control-feedback"></span>
 			</div>
 
-			<button class="btn btn-lg btn-success btn-block"> 登录</button>
+			<button class="btn btn-lg btn-success btn-block" type="button"
+				onclick="login()">登录</button>
 		</form>
 	</div>
 	<script src="${base}/jquery/jquery-2.1.1.min.js"></script>
@@ -55,7 +58,23 @@
 			if (msg != "") {
 				layer.msg(msg);
 			}
+			;
 		})
+		function login() {
+			var accountVal = $("#uaccount").val();
+			var pwdVal = $("#upwd").val();
+			var zza = /^[a-zA-z]\w{3,11}$/;
+			var zzp = /^\w{6,12}$/;
+			if (!zza.test(accountVal) ) {
+				layer.msg("账号格式错误");
+				return;
+			}
+			if (!zza.test(pwdVal)) {
+				layer.msg("密码格式错误");
+				return;
+			}
+			$("#loginForm").submit();
+		}
 	</script>
 </body>
 </html>

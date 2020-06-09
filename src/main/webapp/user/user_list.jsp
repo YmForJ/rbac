@@ -61,7 +61,8 @@ table tbody td:nth-child(even) {
 							<i class=" glyphicon glyphicon-remove"></i> 删除
 						</button>
 						<button type="button" class="btn btn-primary"
-							style="float: right;" onclick="window.location.href='add.jsp'">
+							style="float: right;"
+							onclick="window.location.href='${base}/user/add'">
 							<i class="glyphicon glyphicon-plus"></i> 新增
 						</button>
 						<br>
@@ -95,7 +96,8 @@ table tbody td:nth-child(even) {
 												<button type="button" class="btn btn-primary btn-xs">
 													<i class=" glyphicon glyphicon-pencil"></i>
 												</button>
-												<button type="button" class="btn btn-danger btn-xs">
+												<button type="button" class="btn btn-danger btn-xs"
+													onclick="deleteOne(${user.uid})">
 													<i class=" glyphicon glyphicon-remove"></i>
 												</button>
 											</td>
@@ -127,11 +129,18 @@ table tbody td:nth-child(even) {
 		</div>
 	</div>
 
-	<script src="jquery/jquery-2.1.1.min.js"></script>
-	<script src="bootstrap/js/bootstrap.min.js"></script>
-	<script src="script/docs.min.js"></script>
+	<script src="${base}/jquery/jquery-2.1.1.min.js"></script>
+	<script src="${base}/bootstrap/js/bootstrap.min.js"></script>
+	<script src="${base}/script/docs.min.js"></script>
 	<script type="text/javascript">
 		$(function() {
+			var msg = '${msg}';
+			if (msg != "") {
+				layer.msg(msg, {
+					time : 1500,
+					icon : 1
+				});
+			}
 			$(".list-group-item").click(function() {
 				if ($(this).find("ul")) {
 					$(this).toggleClass("tree-closed");
@@ -149,6 +158,26 @@ table tbody td:nth-child(even) {
 		$("tbody .btn-primary").click(function() {
 			window.location.href = "edit.html";
 		});
+		
+		function deleteOne(no){
+			$.ajax({
+				url:"${base}/user/deleteDo",
+				method:"post",
+				data: no,
+				success:function(res){
+					if(res.msg=="ok"){
+						layer.msg("删除成功!",{time:2000,icon:1},function(){
+							window.location.href="${base}/user/list";
+						});
+					}else{
+						layer.msg("${msg}",{time:2000,icon:2},function(){
+							window.reload();
+						});
+					}
+				},
+				
+			})
+		}
 	</script>
 </body>
 </html>
