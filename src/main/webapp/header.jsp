@@ -44,7 +44,7 @@
 								class="btn btn-default btn-success dropdown-toggle"
 								data-toggle="dropdown">
 								<i class="glyphicon glyphicon-user"></i>
-								${sessionScope.user.uname } <span class="caret"></span>
+								${loginUser.uname } <span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu" role="menu">
 								<li><a href="#"><i class="glyphicon glyphicon-cog"></i>
@@ -52,7 +52,7 @@
 								<li><a href="#"><i class="glyphicon glyphicon-comment"></i>
 										消息</a></li>
 								<li class="divider"></li>
-								<li><a href="logout"><i class="glyphicon glyphicon-off"></i>
+								<li><a href="${base}/logout"><i class="glyphicon glyphicon-off"></i>
 										退出系统</a></li>
 							</ul>
 						</div>

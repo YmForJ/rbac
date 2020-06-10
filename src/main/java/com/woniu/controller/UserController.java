@@ -1,5 +1,6 @@
 package com.woniu.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +28,7 @@ public class UserController {
 	@RequestMapping("list")
 	public String list(HttpSession session, Model model) {
 		if (session.getAttribute("loginUser") != null) {
-			return "user/user_list";
+			return "WEB-INF/user/user_list";
 		}
 		model.addAttribute("msg", "请先登录");
 		return "login";
@@ -36,11 +37,14 @@ public class UserController {
 	@RequestMapping("listDo")
 	@ResponseBody
 	public Map<String, Object> listDo(@RequestParam(name = "pageNum", defaultValue = "1") Integer pageNum,
-			@RequestParam(name = "pageSize", defaultValue = "5") Integer pageSize, HttpSession session) {
+			@RequestParam(name = "pageSize", defaultValue = "5") Integer pageSize, HttpSession session,
+			String condition) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		PageHelper.startPage(pageNum, pageSize);
 		if (session.getAttribute("loginUser") != null) {
-			List<User> userList = userService.findAll();
+			List<User> userList = new ArrayList<User>();
+			/* userList = userService.findAll(condition); */
+			userList = userService.findByOrCondition(condition);
 			PageInfo<User> pageInfo = new PageInfo<>(userList);
 			map.put("userList", userList);
 			map.put("pageInfo", pageInfo);
@@ -48,7 +52,6 @@ public class UserController {
 		} else {
 			map.put("msg", "no");
 		}
-
 		return map;
 
 	}
@@ -56,7 +59,7 @@ public class UserController {
 	@RequestMapping("add")
 	public String add(Model model, HttpSession session) {
 		if (session.getAttribute("loginUser") != null) {
-			return "user/user_add";
+			return "WEB-INF/user/user_add";
 		}
 		model.addAttribute("msg", "请先登录");
 		return "login";

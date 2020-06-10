@@ -6,7 +6,7 @@ import com.woniu.entity.User;
 
 public interface UserService {
 
-	List<User> findAll();
+	List<User> findAll(String condition);
 
 	User login(User user);
 
@@ -17,5 +17,7 @@ public interface UserService {
 	User findOne(Integer uid);
 
 	void update(User user);
+
+	List<User> findByOrCondition(String condition);
 
 }

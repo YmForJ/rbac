@@ -1,12 +1,12 @@
 package com.woniu.service.impl;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.woniu.entity.MyUserExample;
 import com.woniu.entity.User;
 import com.woniu.entity.UserExample;
 import com.woniu.entity.UserExample.Criteria;
@@ -19,11 +19,6 @@ public class UserServiceImpl implements UserService {
 	UserMapper userMapper;
 
 	UserExample example = new UserExample();
-
-	@Override
-	public List<User> findAll() {
-		return userMapper.selectByExample(null);
-	}
 
 	@Override
 	public User login(User user) {
@@ -57,6 +52,26 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void update(User user) {
 		userMapper.updateByPrimaryKeySelective(user);
+	}
+
+	@Override
+	public List<User> findAll(String condition) {
+		example.clear();
+		Criteria criteria = example.createCriteria();
+		if (condition != null && !condition.equals("")) {
+			criteria.andUnameLike("%" + condition + "%");
+		}
+		return userMapper.selectByExample(example);
+
+	}
+
+	@Override
+	public List<User> findByOrCondition(String condition) {
+		MyUserExample myUserExample = new MyUserExample();
+		if(condition!=null&& !condition.equals("")) {
+			myUserExample.setCondition("%" + condition + "%");
+		}
+		return userMapper.selectByOrCondition(myUserExample);
 	}
 
 }
