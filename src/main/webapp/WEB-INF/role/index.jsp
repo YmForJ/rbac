@@ -40,7 +40,7 @@ table tbody td:nth-child(even) {
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h3 class="panel-title">
-							<i class="glyphicon glyphicon-th"></i> 数据列表
+							<i class="glyphicon glyphicon-th"></i> 角色列表
 						</h3>
 					</div>
 					<div class="panel-body">
@@ -60,14 +60,15 @@ table tbody td:nth-child(even) {
 							</button>
 						</form>
 						<button type="button" class="btn btn-danger"
-							style="float: right; margin-left: 10px;">
-							<i class=" glyphicon glyphicon-remove" id="deleteAllBtn"></i> 删除
+							style="float: right; margin-left: 10px;" id="deleteAllBtn">
+							<i class=" glyphicon glyphicon-remove"></i> 删除
 						</button>
 						<button type="button" class="btn btn-primary"
 							style="float: right;"
-							onclick="window.location.href='${base}/user/add'">
+							onclick="window.location.href='${base}/role/add'">
 							<i class="glyphicon glyphicon-plus"></i> 新增
 						</button>
+
 						<br>
 
 						<hr style="clear: both;">
@@ -92,15 +93,15 @@ table tbody td:nth-child(even) {
 										<tr>
 											<th width="30">#</th>
 											<th width="60">选择</th>
-											<th>账号</th>
 											<th>名称</th>
-											<th>邮箱地址</th>
 											<th width="150">操作</th>
 										</tr>
 									</thead>
+
 									<tbody id="tbody">
 
 									</tbody>
+
 									<tfoot>
 										<tr>
 											<td colspan="6" align="center">
@@ -119,7 +120,7 @@ table tbody td:nth-child(even) {
 			</div>
 		</div>
 	</div>
-	<!-- 用户更新模态框 -->
+	<!-- 角色更新模态框 -->
 	<div class="modal fade" id="updateModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
 		<div class="modal-dialog">
@@ -127,27 +128,16 @@ table tbody td:nth-child(even) {
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel">用户更新</h4>
+					<h4 class="modal-title" id="myModalLabel">角色更新</h4>
 				</div>
 				<div class="modal-body">
 					<form id="updateForm">
-						<input id="uid" name="uid" type="hidden" />
+						<input id="rid" name="rid" type="hidden" />
 						<div class="form-group">
-							<label for="exampleInputPassword1">账号</label> <input type="text"
-								class="form-control" id="uaccount" name="uaccount">
+							<label for="exampleInputPassword1">角色名称</label> <input
+								type="text" class="form-control" id="rname" name="rname">
 						</div>
-						<div class="form-group">
-							<label for="exampleInputPassword1">密码</label> <input type="text"
-								class="form-control" id="upwd" name="upwd">
-						</div>
-						<div class="form-group">
-							<label for="exampleInputPassword1">昵称</label> <input type="text"
-								class="form-control" id="uname" name="uname">
-						</div>
-						<div class="form-group">
-							<label for="exampleInputPassword1">邮箱</label> <input type="text"
-								class="form-control" id="umail" name="umail">
-						</div>
+
 					</form>
 				</div>
 				<div class="modal-footer">
@@ -167,21 +157,20 @@ table tbody td:nth-child(even) {
 	<script src="${base}/script/docs.min.js"></script>
 	<script src="${base}/js/template-web.js"></script>
 
-	<!-- 使用template创建user内容 -->
-	<script type="text/html" id="userContextTemplate">
-{{each userList user index}}
+	<!-- 使用template创建role内容 -->
+	<script type="text/html" id="roleContextTemplate">
+{{each roleList role index}}
 <tr>
-<td> {{index + 1+((pageInfo.pageSize)*(pageInfo.prePage))}} </td>
-<td><input type="checkbox" value="{{user.uid}}"  name="uid" class="checkBtn"></td>
-<td>{{ user.uaccount}}</td>
-<td>{{user.uname}}</td>
-<td>{{user.umail}}</td>
-<td>
-<button type="button" class="btn btn-success btn-xs"   onclick="toAssignRole({{user.uid}})"><i class=" glyphicon glyphicon-check"></i></button>
+<input type="hidden" name="rid" id="rid" value="{{role.rid}}">
+<td> {{index +1+((pageInfo.pageSize)*(pageInfo.prePage))}} </td>
+<td><input type="checkbox" ></td>
+<td>{{role.rname}}</td>
+<td>	
+<button type="button" class="btn btn-success btn-xs"   onclick="toAssignRole({{role.rid}})"><i class=" glyphicon glyphicon-check"></i></button>
 <button type="button" class="btn btn-primary btn-xs updateBtn"
-value="{{user.uid}}" onclick="initUpdateModal({{user.uid}})" data-toggle="modal"
+value="{{role.rid}}" onclick="initUpdateModal({{role.rid}})" data-toggle="modal"
 data-target="#updateModal"><i class=" glyphicon glyphicon-pencil"></i></button>
-<button type="button" class="btn btn-danger btn-xs" onclick="deleteOne({{user.uid}})">
+<button type="button" class="btn btn-danger btn-xs" onclick="deleteOne({{role.rid}})">
 <i class=" glyphicon glyphicon-remove"></i>
 </button>
 </td>
@@ -206,8 +195,6 @@ data-target="#updateModal"><i class=" glyphicon glyphicon-pencil"></i></button>
 					icon : 1
 				});
 			}
-			/* 初始化列表页 */
-			showByPage(1);
 
 			$("#checkAllBtn").click(function() {
 				$(".checkBtn").attr({
@@ -224,10 +211,11 @@ data-target="#updateModal"><i class=" glyphicon glyphicon-pencil"></i></button>
 					$(this).prop("checked", !$(this).prop("checked"));
 				})
 			})
-			
+
 			$("#deleteAllBtn").click(function() {
+				console.log($("#deleteForm").serialize());
 				$.ajax({
-					url : "${base}/user/deleteDo",
+					url : "${base}/role/deleteDo",
 					method : "post",
 					data : $("#deleteForm").serialize(),
 					success : function(res) {
@@ -243,40 +231,46 @@ data-target="#updateModal"><i class=" glyphicon glyphicon-pencil"></i></button>
 								time : 2000,
 								icon : 2
 							}, function() {
-								location.reload();
 							});
 						}
 					},
+
 				})
+
 			})
+			/* 初始化列表页 */
+			showByPage(1);
 
 			$("#doupdateBtn").click(function() {
 				$.ajax({
-					url : "${base}/user/updateDo",
+					url : "${base}/role/updateDo",
 					type : "post",
 					data : $("#updateForm").serialize(),
 					success : function(res) {
 						if (res.msg == "ok") {
-							window.location.href = "${base}/user/list";
+							layer.msg("修改角色成功", {
+								time : 1500,
+								icon : 6
+							}, function() {
+								window.location.href = "${base}/role/index";
+							});
+						} else if (res.msg == "no") {
+							layer.msg("角色更新失败,请稍后再试");
+						} else if (res.msg == "login") {
+							window.location.href = "${base}/login.jsp";
 						}
 					}
 				})
 			});
 
-			/*  修改用户信息模态框 */
-			$(".updateBtn").click(function() {
-
-			});/* 修改用户信息结束 */
-
 			$("#searchBtn").click(function() {
 				showByPage(1);
 			})
 		});/* load结束 */
-
 		/* 根据页码查询数据的函数 */
 		function showByPage(page) {
 			$.ajax({
-				url : "${base}/user/listDo",
+				url : "${base}/role/listDo",
 				type : "post",
 				data : {
 					"pageNum" : page,
@@ -284,12 +278,12 @@ data-target="#updateModal"><i class=" glyphicon glyphicon-pencil"></i></button>
 				},
 				success : function(res) {
 					/* 声明一个template对userList数据进行转化 */
-					var userListHtml = template('userContextTemplate', {
-						"userList" : res.userList,
+					var roleListHtml = template('roleContextTemplate', {
+						"roleList" : res.roleList,
 						"pageInfo" : res.pageInfo
 					});
 					$("#pageNum").val(res.pageInfo.page);
-					$("#tbody").html(userListHtml);
+					$("#tbody").html(roleListHtml);
 					/* 声明一个template对pageList进行转换 */
 					var pageListHtml = template('pageContextTemplate', {
 						"pageInfo" : res.pageInfo,
@@ -338,10 +332,10 @@ data-target="#updateModal"><i class=" glyphicon glyphicon-pencil"></i></button>
 
 		function deleteOne(no) {
 			$.ajax({
-				url : "${base}/user/deleteDo",
+				url : "${base}/role/deleteDo",
 				method : "post",
 				data : {
-					"uid" : no
+					"rid" : no
 				},
 				success : function(res) {
 					if (res.msg == "ok") {
@@ -356,7 +350,6 @@ data-target="#updateModal"><i class=" glyphicon glyphicon-pencil"></i></button>
 							time : 2000,
 							icon : 2
 						}, function() {
-							location.reload();
 						});
 					}
 				},
@@ -365,23 +358,20 @@ data-target="#updateModal"><i class=" glyphicon glyphicon-pencil"></i></button>
 		};
 
 		function initUpdateModal(no) {
-			alert(no);
 			$.ajax({
-				url : "${base}/user/update",
+				url : "${base}/role/update",
 				type : "post",
 				data : {
-					"uid" : no
+					"rid" : no
 				},
 				success : function(res) {
-					alert(2);
 					if (res.msg == "ok") {
-						$("#uid").val(res.user.uid);
-						$("#uaccount").val(res.user.uaccount);
-						$("#upwd").val(res.user.upwd);
-						$("#uname").val(res.user.uname);
-						$("#umail").val(res.user.umail);
-					} else {
+						$("#rid").val(res.role.rid);
+						$("#rname").val(res.role.rname);
+					} else if (res.msg == "login") {
 						window.location.href = "${base}/login.jsp";
+					} else {
+						layer.msg("角色更新失败,请稍后再试");
 					}
 				}
 

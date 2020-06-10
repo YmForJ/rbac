@@ -44,36 +44,14 @@
 						</div>
 					</div>
 					<div class="panel-body">
-						<form role="form" action="${base}/user/addDo" method="post"
+						<form role="form"  method="post"
 							id="regForm">
 							<div class="form-group">
-								<label for="exampleInputPassword1">登陆账号</label> <input
-									type="text" class="form-control" id="uaccount" name="uaccount"
+								<label for="exampleInputPassword1">角色名</label> <input
+									type="text" class="form-control" id="rname" name="rname"
 									placeholder="请输入登陆账号">
 							</div>
-							<div class="form-group">
-								<label for="exampleInputPassword1">用户名称</label> <input
-									type="text" class="form-control" id="uname" name="uname"
-									placeholder="请输入用户名称">
-							</div>
-							<div class="form-group">
-								<label for="exampleInputPassword1">密码</label> <input
-									type="password" class="form-control" id="upwd" name="upwd"
-									placeholder="请输入用户密码">
-							</div>
-							<div class="form-group">
-								<label for="exampleInputPassword1">确认密码</label> <input
-									type="password" class="form-control" id="surepwd"
-									name="surepwd" placeholder="请再次输入密码">
-							</div>
-							<div class="form-group">
-								<label for="exampleInputEmail1">邮箱地址</label> <input type="email"
-									class="form-control" id="umail" name="umail"
-									placeholder="请输入邮箱地址">
-								<p class="help-block label label-warning">请输入合法的邮箱地址, 格式为：
-									xxxx@xxxx.com</p>
-							</div>
-							<button type="button" class="btn btn-success" onclick="addUser()">
+							<button type="button" class="btn btn-success" id="addBtn">
 								<i class="glyphicon glyphicon-plus"></i> 新增
 							</button>
 							<button type="button" class="btn btn-danger">
@@ -85,35 +63,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">
-						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel">帮助</h4>
-				</div>
-				<div class="modal-body">
-					<div class="bs-callout bs-callout-info">
-						<h4>测试标题1</h4>
-						<p>测试内容1，测试内容1，测试内容1，测试内容1，测试内容1，测试内容1</p>
-					</div>
-					<div class="bs-callout bs-callout-info">
-						<h4>测试标题2</h4>
-						<p>测试内容2，测试内容2，测试内容2，测试内容2，测试内容2，测试内容2</p>
-					</div>
-				</div>
-				<!--
-		  <div class="modal-footer">
-			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			<button type="button" class="btn btn-primary">Save changes</button>
-		  </div>
-		  -->
-			</div>
-		</div>
-	</div>
+	
 	<script src="${base}/jquery/jquery-2.1.1.min.js"></script>
 	<script src="${base}/bootstrap/js/bootstrap.min.js"></script>
 	<script src="${base}/script/docs.min.js"></script>
@@ -124,6 +74,23 @@
 			if(msg!=""){
 				layer.msg(msg,{time:1500,icon:1});
 			}
+			
+			$("#addBtn").click(function(){
+				$.ajax({
+					url:"${base}/role/addDo",
+					type:"post",
+					data:$("#regForm").serialize(),
+					success:function(res){
+									if(res.result){
+										layer.msg("角色增加成功,即将跳转角色列表页",{time:2000,icon:6},function(){
+											location.href="${base}/role/init";
+										})
+									}else{
+										layer.msg("角色增加失败,请重试",{time:2000,icon:5});
+									}						
+					}
+				})
+			})
 
 		});
 		function addUser() {

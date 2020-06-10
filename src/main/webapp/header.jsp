@@ -12,6 +12,12 @@
 <link rel="stylesheet" href="${base}/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="${base}/css/font-awesome.min.css">
 <link rel="stylesheet" href="${base}/css/main.css">
+<link rel="stylesheet" href="${base }/ztree/css/demo.css">
+<link rel="stylesheet"
+	href="${base }/ztree/css/zTreeStyle/zTreeStyle.css">
+	<script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript"
+	src="${base}/ztree/js/jquery.ztree.all-3.5.js"></script>
 <style>
 .tree li {
 	list-style-type: none;

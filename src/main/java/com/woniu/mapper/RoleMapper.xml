@@ -236,4 +236,22 @@
     set rname = #{rname,jdbcType=VARCHAR}
     where rid = #{rid,jdbcType=INTEGER}
   </update>
+  
+<!-- 全字段查询角色信息 -->  
+    	<select id="selectByOrCondition" parameterType="myRoleExample"
+		resultType="role">
+		select
+		<include refid="Base_Column_List"></include>
+		from rbac_role.role
+		<where>
+			<if test="condition!=null">
+				or rid like #{condition}
+			</if>
+			<if test="condition!=null">
+				or rname like #{condition}
+			</if>
+		</where>
+
+	</select>
+  
 </mapper>

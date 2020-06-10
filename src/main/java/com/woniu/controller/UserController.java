@@ -116,6 +116,7 @@ public class UserController {
 	@ResponseBody
 	public Map<String, Object> deleteDo(HttpSession session, Integer[] uid) {
 		Map<String, Object> map = new HashMap<>();
+		System.out.println(uid);
 		if (session.getAttribute("loginUser") != null) {
 			try {
 				userService.delete(uid);
